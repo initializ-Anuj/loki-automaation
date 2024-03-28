@@ -1,0 +1,30 @@
+name: Terraform Workflow
+on:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Initialize Terraform
+      id: init
+      run: terraform init
+
+    - name: Terraform Plan
+      id: plan
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform plan
+
+    - name: Apply Terraform Deployment
+      run: terraform apply -auto-approve    
