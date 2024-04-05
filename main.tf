@@ -1,6 +1,6 @@
 provider "helm" {
   kubernetes {
-    config_path = "k3s.yaml"
+    config_path =file("k3s.yaml")
     
   }
 }
