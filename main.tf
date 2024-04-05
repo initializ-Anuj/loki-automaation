@@ -5,7 +5,7 @@ provider "helm" {
   }
 }
 provider "kubernetes" {
-  config_path    = "k3s.yaml"
+  config_path    = file("k3s.yaml")
 }
 resource "helm_release" "loki" {
   name       = "loki"
